@@ -1,0 +1,9 @@
+﻿  Flatworld.cpp
+C:\Users\michael\source\repos\gravBall\gravBall\Flatworld.h(39,30): warning C4305:  'initializing': truncation from 'double' to 'float'
+C:\Users\michael\source\repos\gravBall\gravBall\Flatworld.h(20,65): warning C4305:  'initializing': truncation from 'double' to 'float'
+C:\Users\michael\source\repos\gravBall\gravBall\Flatworld.h(24,15): warning C4305:  'initializing': truncation from 'double' to 'float'
+C:\Users\michael\source\repos\gravBall\gravBall\Flatworld.cpp(16,3): warning C4065:  switch statement contains 'default' but no 'case' labels
+C:\Users\michael\source\repos\gravBall\gravBall\Flatworld.cpp(58,19): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\michael\source\repos\gravBall\gravBall\Flatworld.cpp(64,25): warning C4018:  '<': signed/unsigned mismatch
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol _main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\Users\michael\source\repos\gravBall\Debug\gravBall.exe : fatal error LNK1120: 1 unresolved externals
