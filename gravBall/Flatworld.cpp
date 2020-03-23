@@ -2,12 +2,7 @@
 #include <algorithm>
 #include <cmath>
 
-struct forceVec {
-	float x;
-	float y;
-};
-
-//allow for the addition of different approaches for comparison
+//allows for the addition of different approaches for comparison
 void Flatworld::Sim(int TickCount) {
 	for(int i = 0; i < TickCount; i++) {
 		switch (simSett) {
@@ -17,7 +12,7 @@ void Flatworld::Sim(int TickCount) {
 	}
 }
 
-//adds random ball
+//adds random ball to world
 bool Flatworld::addBall() {
 	if (matter.size() == matter.max_size()) {
 		return false;
@@ -34,7 +29,7 @@ bool Flatworld::addBall() {
 	return true;
 }
 
-//adds ball of given params
+//adds ball of given params to world
 bool Flatworld::addBall(float x, float y, float mass, float rad, float velmag, float velvec, bool stat) {
 	if (matter.size() == matter.max_size()) {
 		return false;
@@ -58,8 +53,6 @@ void Flatworld::laughablyNaiveSim(){
 	for(int i = 0; i < matter.size(); i++) {
 		//current kinetic energy of object i
 		ball obj1 = matter[i];
-		float energy = (obj1.mass / 2) * pow(obj1.velmag, 2);
-
 		//computing net force on particle i
 		for (int j = i + 1; j < matter.size(); j++) {			
 			ball obj2 = matter[j];
@@ -70,7 +63,7 @@ void Flatworld::laughablyNaiveSim(){
 
 			//(distance between the obj)^2
 			float dist2 = pow(abs(xdelt), 2) + pow(abs(ydelt), 2);
-			float force = (G * obj1.mass * obj2.mass) / dist2;
+			float force = (G * Gmult * obj1.mass * obj2.mass) / dist2;
 
 			//force vector magnitudes along x and y axes, acting on obj1
 			float Fx = force * xdelt / sqrtf(dist2);
@@ -80,26 +73,33 @@ void Flatworld::laughablyNaiveSim(){
 			forceNet[j].x -= Fx; //equal and opposite force on both objects
 			forceNet[j].y -= Fy;
 		}
+		if (!obj1.stat) {
+			//new velocity along x and y axes
+			float xVd = (forceNet[i].x / obj1.mass * tickInterval) + matter[i].velmag * cosf(matter[i].velvec);
+			float yVd = (forceNet[i].y / obj1.mass * tickInterval) + matter[i].velmag * sinf(matter[i].velvec);
 
-		//new velocity along x and y axes
-		float xVd = (forceNet[i].x / obj1.mass * tickInterval) + matter[i].velmag * cosf(matter[i].velvec);
-		float yVd = (forceNet[i].y / obj1.mass * tickInterval) + matter[i].velmag * sinf(matter[i].velvec);
-		
-		//update model velocity
-		matter[i].velmag = sqrtf(pow(xVd, 2) + pow(yVd, 2));
-		matter[i].velvec = atanf(yVd / xVd);
+			//update model velocity
+			matter[i].velmag = sqrtf(pow(xVd, 2) + pow(yVd, 2));
+			matter[i].velvec = atanf(yVd / xVd);
 
-		//update position using updated velocity
-		matter[i].posx += xVd * tickInterval;
-		matter[i].posy += yVd * tickInterval;
+			//update position using updated velocity
+			matter[i].posx += xVd * tickInterval;
+			matter[i].posy += yVd * tickInterval;
+		}
 	}
 }
 
-void Flatworld::render(){ //??
-
+void Flatworld::setGmult(int mult) {
+	Gmult = mult;
 }
 
-int main() {
-	Flatworld* beta = new Flatworld();
+void Flatworld::setTickInterval(float newinterval) {
+	tickInterval = newinterval;
+}
 
+//erases all objects
+void Flatworld::reset() {
+	size_t temp = matter.size();
+	matter.resize(0);
+	matter.reserve(temp);
 }

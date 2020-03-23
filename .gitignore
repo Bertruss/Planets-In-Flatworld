@@ -3,3 +3,9 @@
 ################################################################################
 
 /gravBall/SDL2test.lib
+/gravBall/SDL2main.lib
+/gravBall/SDL2.lib
+/gravBall/SDL2.dll
+/.vs/gravBall/v16/Browse.VC.opendb
+/.vs/gravBall/v16/Browse.VC.db
+/.vs/gravBall/v16/.suo

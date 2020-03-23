@@ -1,0 +1,9 @@
+﻿  Flatworld.cpp
+C:\Users\michael\source\repos\Bertruss\Planets-In-Flatworld\gravBall\Flatworld.cpp(11,3): warning C4065:  switch statement contains 'default' but no 'case' labels
+  runtime.cpp
+  Generating Code...
+C:\Users\michael\source\repos\Bertruss\Planets-In-Flatworld\gravBall\Flatworld.cpp(93,10): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+SDL2main.lib(SDL_windows_main.obj) : error LNK2019: unresolved external symbol SDL_main referenced in function main_getcmdline
+    Hint on symbols that are defined and could potentially match:
+      "int __cdecl SDL_main(void)" (?SDL_main@@YAHXZ)
+C:\Users\michael\source\repos\Bertruss\Planets-In-Flatworld\x64\Debug\gravBall.exe : fatal error LNK1120: 1 unresolved externals
